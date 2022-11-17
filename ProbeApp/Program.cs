@@ -14,6 +14,30 @@ namespace ProbeApp
             probe.temperatureChanged += DisplayYellow;
             probe.temperatureChanged += DisplayGreen;
 
+            // abonnement d'une méthode anonyme (qui respecte la définition du delegate)
+            probe.temperatureChanged += delegate (int value)
+            {
+                if (value < 25)
+                    return;
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"température detectée : {value}, climatisation lancée");
+                Console.ForegroundColor = ConsoleColor.White;
+            };
+
+            // abonnement d'une méthode anonyme en lambda (qui respecte la définition du delegate)
+            probe.temperatureChanged += value =>
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+
+                if(value > 25)
+                    Console.WriteLine($"température detectée : {value}, persiennes inclinées");
+                else if(value < 22)
+                    Console.WriteLine($"température detectée : {value}, persiennes ouvertes");
+
+                Console.ForegroundColor = ConsoleColor.White;
+            };
+
             // lancement de la simulation
             probe.Execute();
 
