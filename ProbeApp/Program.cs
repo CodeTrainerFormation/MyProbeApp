@@ -29,7 +29,7 @@ namespace ProbeApp
 
         static void DisplayGreen(int value)
         {
-            if (value > 20)
+            if (value > 17)
                 return;
 
             Console.ForegroundColor = ConsoleColor.Green;
