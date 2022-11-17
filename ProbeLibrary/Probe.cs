@@ -2,7 +2,14 @@
 {
     public class Probe
     {
-        public ProbeHandler temperatureChanged;
+        private event ProbeHandler temperatureChanged;
+        
+        // une sorte de Getter/Setter pour les events - en mode ajout/suppression de méthodes
+        public event ProbeHandler TemperatureChanged
+        {
+            add { temperatureChanged += value; }
+            remove { temperatureChanged -= value; }
+        }
 
         /// <summary>
         /// Simulation d'une sonde

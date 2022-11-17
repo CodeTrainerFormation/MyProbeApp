@@ -11,11 +11,11 @@ namespace ProbeApp
             Probe probe = new Probe();
 
             // abonnement des méthodes (qui respecte la définition du delegate)
-            probe.temperatureChanged += DisplayYellow;
-            probe.temperatureChanged += DisplayGreen;
+            probe.TemperatureChanged += DisplayYellow;
+            probe.TemperatureChanged += DisplayGreen;
 
             // abonnement d'une méthode anonyme (qui respecte la définition du delegate)
-            probe.temperatureChanged += delegate (int value)
+            probe.TemperatureChanged += delegate (int value)
             {
                 if (value < 25)
                     return;
@@ -26,7 +26,7 @@ namespace ProbeApp
             };
 
             // abonnement d'une méthode anonyme en lambda (qui respecte la définition du delegate)
-            probe.temperatureChanged += value =>
+            probe.TemperatureChanged += value =>
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
 
@@ -37,6 +37,15 @@ namespace ProbeApp
 
                 Console.ForegroundColor = ConsoleColor.White;
             };
+
+            // désabonnement d'une méthode
+            // probe.TemperatureChanged -= DisplayGreen;
+
+            // désabonnement de toutes les méthodes (si get/set)
+            // probe.TemperatureChanged = null;
+
+            // -- interdit grâce à 'event' (dans la classe Probe) --
+            // probe.temperatureChanged(50);
 
             // lancement de la simulation
             probe.Execute();
